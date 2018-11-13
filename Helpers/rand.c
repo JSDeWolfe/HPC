@@ -1,8 +1,5 @@
-//rand
-#include <cstdlib> 
-#include <ctime> 
-#include <iostream>
-#include <fstream>
+#include <time.h>
+//#include <fstream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -15,8 +12,6 @@
 #define NUMINTS  (100)
 #define FILESIZE (NUMINTS * sizeof(int))
 
-using namespace std;
-
 void writerandstofile();
 int maprandstomem();
 int readmap();
@@ -24,7 +19,7 @@ int readmap();
 //https://stackoverflow.com/questions/25833541/reading-numbers-from-file-c
 
 void writerandstofile() {
-    ofstream myfile;
+    /*ofstream myfile;
     srand(244); 
     int i;
     int p;
@@ -33,22 +28,14 @@ void writerandstofile() {
     p = rand()%1000000; 
     myfile << p << "\n";
     }
-    myfile.close();
+    myfile.close();*/
 }
 
 int maprandstomem() {
-    //std::ifstream readfile("example.txt", std::ios_base::in);
-    //int a;
-    //while (readfile >> a)
-    //{
-        //printf("%d ", a);
-    //    cout << a << "\n";
-    //}
-    //getchar();
     int i;
     int fd;
     int result;
-    int *map;  /* mmapped array of int's */
+    int *map;  /* mmapped array of ints */
     fd = open(FILEPATH, O_RDWR | O_CREAT | O_TRUNC, (mode_t)0600);
     
     if (fd == -1) {
@@ -109,8 +96,6 @@ int readmap() {
     exit(EXIT_FAILURE);
     }
     
-    /* Read the file int-by-int from the mmap
-     */
     for (i = 1; i <=NUMINTS; ++i) {
     printf("%d: %d\n", i, map[i]);
     }
@@ -126,7 +111,7 @@ int readmap() {
 
 int main(int argc, char * argv[]) 
 { 
-    writerandstofile();
+    //writerandstofile();
     maprandstomem();
     readmap();
     return 0;
