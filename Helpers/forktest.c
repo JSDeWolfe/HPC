@@ -27,8 +27,6 @@ int main() {
       shmdt(shm);
    }
    else {
-      /* Variable s removed, it wasn't used */
-      /* Removed first call to wait as it held up parent process */
       shmid = shmget(2009, SHMSIZE, 0666 | IPC_CREAT);
       shm = shmat(shmid, 0, 0);
       wait(NULL);
