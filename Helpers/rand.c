@@ -59,6 +59,7 @@ int randfiletoarray(int arrsize) {
    fclose(fptr);  
 
    shmid = shmget(key, SHSIZE, IPC_CREAT | 0666);
+
    if(shmid<0)
    {perror("shmget");exit(1);}
 
@@ -73,10 +74,6 @@ int randfiletoarray(int arrsize) {
    s += 11;
 
    *s = 0;
-
-   while(*shm != '*') {
-      sleep(1);
-   }
 
    return 0;
 }
@@ -173,8 +170,7 @@ int shclienttest() {
     {
         printf("%c", *s);
     }
-    printf("\n");
-    *shm = '*';
+    printf("client reached \n");
     return 0;
 }
 
@@ -185,7 +181,7 @@ int main(int argc, char * argv[])
     int sortsize = 7;
     writerandstofile(sortsize);
     randfiletoarray(sortsize);
-    //shclienttest();
+    shclienttest();
     //maprandstomem();
     //readmap();
     return 0;
